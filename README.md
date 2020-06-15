@@ -1,6 +1,12 @@
 # terpotify
 Simple shell code to control spotify with terminal
 
+## How to install
+   - using wget:
+     * `bash -c "$(wget -q -O- https://raw.githubusercontent.com/mhbahmani/terpotify/master/install.sh)"`
+   - using curl:
+     * `bash -c "$(curl -L -fsS -r 5 https://raw.githubusercontent.com/mhbahmani/terpotify/master/install.sh)"`
+
 ## How to use
 
 | **Command**                       | **Description**                                       |
