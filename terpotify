@@ -1,32 +1,39 @@
 #!/bin/bash
 
+
 case $1 in
 	open | o)
-		echo open spotify
+		spotify
 		;;
         play | pl)
-		echo play
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play
 		;;
         pause | pa)
-		echo pause
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
                 ;;
+	trigger | t)
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+		;;
         next | n)
-                echo next
+                dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
                 ;;
 	previous | pr)
-		echo pr
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+		;;
+	setvolume | sv)
+		amixer -D pulse sset Master $2%
 		;;
 	mute | m)
-		echo mute
+		amixer -D pulse sset Master 0
 		;;
 	volumeup | vu)
-		echo vu
+		amixer -D pulse sset Master $2%+
 		;;
 	volumedown | vd)
-		echo vd
+		amixer -D pulse sset Master $2%-
                 ;;
 	*)
 		echo "Find what you want"
-		help
+		echo "help"
 		;; 
 esac
