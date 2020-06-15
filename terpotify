@@ -1,0 +1,32 @@
+#!/bin/bash
+
+case $1 in
+	open | o)
+		echo open spotify
+		;;
+        play | pl)
+		echo play
+		;;
+        pause | pa)
+		echo pause
+                ;;
+        next | n)
+                echo next
+                ;;
+	previous | pr)
+		echo pr
+		;;
+	mute | m)
+		echo mute
+		;;
+	volumeup | vu)
+		echo vu
+		;;
+	volumedown | vd)
+		echo vd
+                ;;
+	*)
+		echo "Find what you want"
+		help
+		;; 
+esac
