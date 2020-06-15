@@ -14,4 +14,4 @@ Simple shell code to control spotify with terminal
 |`terp setvolume, sv <value>`       | Set volume to given value                             |
 |`terp mute, m`                     | Set volume to 0                                       |
 |`terp volumeup, vu <value>`        | Increases the volume                                  |
-|`terp volumeup, vu <value>`        | Decreases the volume                                  |
+|`terp volumedown, vd <value>`      | Decreases the volume                                  |
