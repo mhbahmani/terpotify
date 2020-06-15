@@ -1,37 +1,49 @@
 #!/bin/bash
 
+show_valume_change_resualt(){
+	new_volume=$(echo $1 | cut -d '[' -f 2 | cut -d ']' -f 1)
+	echo "Volume set to $new_volume"
+}
 
 case $1 in
 	open | o)
 		spotify
 		;;
         play | pl)
-		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play > /dev/null 2>&1
+		echo "Music played"
 		;;
         pause | pa)
-		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-                ;;
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause > /dev/null 2>&1
+                echo "Music paused"
+		;;
 	trigger | t)
-		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause > /dev/null 2>&1
 		;;
         next | n)
-                dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+                dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next > /dev/null 2>&1
+		echo "Next"
                 ;;
 	previous | pr)
-		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+		dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous > /dev/null 2>&1
+		echo "Previous"
 		;;
 	setvolume | sv)
-		amixer -D pulse sset Master $2%
+		resualt=$(amixer -D pulse sset Master $2%)
+		show_volume_change_resualt $resualt 
 		;;
 	mute | m)
-		amixer -D pulse sset Master 0
+		resualt=$(amixer -D pulse sset Master $2%)
+		show show_volume_change_resualt
 		;;
 	volumeup | vu)
-		amixer -D pulse sset Master $2%+
+		resualt=$(amixer -D pulse sset Master $2%+)
+		show_volume_change_resualt
 		;;
 	volumedown | vd)
-		amixer -D pulse sset Master $2%-
-                ;;
+		resualt=$(amixer -D pulse sset Master $2%-)
+		show_volume_change_resualt
+		;;
 	*)
 		echo "Find what you want"
 		echo "help"
