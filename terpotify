@@ -6,6 +6,11 @@ show_volume_change_resualt(){
 }
 
 case $1 in
+	ydl)
+		until torify youtube-dl -o '%(title)s.%(ext)s' $2 ; do sleep 5 ; done ;
+		;;
+	ydl-pl)
+	until torify youtube-dl --playlist-start 1 -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' $2 ; do sleep 10 ; done ;
 	open | o)
 		spotify
 		;;
